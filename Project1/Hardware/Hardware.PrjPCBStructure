@@ -1,0 +1,6 @@
+Record=TopLevelDocument|FileName=General.SchDoc
+Record=SheetSymbol|SourceDocument=General.SchDoc|Designator=Designator|SchDesignator=Designator|FileName=Button.SchDoc|SymbolType=Normal|RawFileName=Button.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=General.SchDoc|Designator=Designator|SchDesignator=Designator|FileName=STM32.SchDoc|SymbolType=Normal|RawFileName=STM32.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=General.SchDoc|Designator=Designator|SchDesignator=Designator|FileName=Sensor.SchDoc|SymbolType=Normal|RawFileName=Sensor.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=General.SchDoc|Designator=Designator|SchDesignator=Designator|FileName=Power.SchDoc|SymbolType=Normal|RawFileName=Power.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=General.SchDoc|Designator=Designator|SchDesignator=Designator|FileName=Motor.SchDoc|SymbolType=Normal|RawFileName=Motor.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
