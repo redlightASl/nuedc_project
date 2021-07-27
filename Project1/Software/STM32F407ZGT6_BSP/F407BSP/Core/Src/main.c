@@ -78,6 +78,7 @@ void Task_Idle(void);
 void rotate_board(void);
 void stable_board(void);
 void pid_stable_board(void);
+void pid_laser_pointer(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
