@@ -135,9 +135,9 @@ void MPU9250_CalculateTemperatureData(float *tempdata)
 //输出保存的数据
 void MPU9250_Output(int16_t* buffer)
 {
-	buffer[0] = accData[0];
-	buffer[1] = accData[1];
-	buffer[2] = accData[2];
+	buffer[0] = accData[0]; //x
+	buffer[1] = accData[1]; //y
+	buffer[2] = accData[2]; //z
 	buffer[3] = gyroData[0];
 	buffer[4] = gyroData[1];
 	buffer[5] = gyroData[2];

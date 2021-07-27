@@ -50,7 +50,7 @@ int fputc(int ch,FILE *f)
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+//#define START
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -165,8 +165,13 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+#ifdef START
 		Task_scan_button();
 		Task_problem();
+#else
+//	  test_TIM_Encoder();
+	  test_mpu9250();
+#endif
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -296,7 +301,7 @@ void rotate_board(void)
 
 /**
 	第二题
-让平板保持水平
+让平板和摆保持垂直
 摆角是多少，步进电机就转多少
 */
 void stable_board(void)
@@ -311,7 +316,28 @@ void stable_board(void)
 */
 void pid_stable_board(void)
 {
+	//volatile float target_angle = Encoder_Get_Angle();
+	//volatile float target_speed = 
 	PWM_Rotate(PID_realize(Encoder_Get_Angle()));
+}
+
+/**
+	发挥部分
+经过数学计算得到
+应使平板转动4/9 theta
+靠近平衡位置-正转
+远离平衡位置-反转
+*/
+void pid_laser_pointer(void)
+{
+	if(close_to_middle()) //靠近平衡位置
+	{
+		pid_laser_pointer_rotate(MOV_THETA * Encoder_Get_Angle(), 0);
+	}
+	else
+	{
+		pid_laser_pointer_rotate(MOV_THETA * Encoder_Get_Angle(), 1);
+	}
 }
 
 /* USER CODE END 4 */
