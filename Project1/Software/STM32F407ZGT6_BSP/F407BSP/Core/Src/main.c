@@ -16,14 +16,15 @@
   *
   ******************************************************************************
   */
-/* USER CODE END Header */
-/* Includes ------------------------------------------------------------------*/
+  /* USER CODE END Header */
+  /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "i2c.h"
 #include "spi.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
+#include "math.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -32,7 +33,8 @@
 #include <stdint.h>
 #include <string.h>
 
-//#include "hmc5883l.h"
+/*******************/
+#include "hmc5883l.h"
 #include "mpu9250.h"
 #include "encoder.h"
 #include "pwmout.h"
@@ -40,17 +42,17 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-int fputc(int ch,FILE *f)
+int fputc(int ch, FILE* f)
 {
-	uint32_t temp = ch;
-    HAL_UART_Transmit(&huart1, (uint8_t *)&temp, 1, 1000);
-    return ch;
+  uint32_t temp = ch;
+  HAL_UART_Transmit(&huart1, (uint8_t*)&temp, 1, 1000);
+  return ch;
 }
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-//#define START
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -78,7 +80,6 @@ void Task_Idle(void);
 void rotate_board(void);
 void stable_board(void);
 void pid_stable_board(void);
-void pid_laser_pointer(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -87,34 +88,34 @@ void pid_laser_pointer(void);
 //基本算法初始化
 void Calculate_Init(void)
 {
-	PID_param_init();
+  PID_param_init();
 }
 
 //编码器驱动测试
 void test_TIM_Encoder(void)
 {
-	uint32_t enc1 = 0;
-	enc1 = (uint32_t)(__HAL_TIM_GET_COUNTER(&htim3)); //获取编码器的值
-	printf("%d", enc1);
+  uint32_t enc1 = 0;
+  enc1 = (uint32_t)(__HAL_TIM_GET_COUNTER(&htim3)); //获取编码器的值
+  printf("%d", enc1);
 }
 
 //六轴驱动测试
 void test_mpu9250(void)
 {
-	int16_t my_test_buffer[9] = {0};
-	
-	MPU9250_ReadAccelerateData();
-	MPU9250_ReadGYROData();
-	MPU9250_ReadMagneticData();
-	MPU9250_Output(my_test_buffer);
+  int16_t my_test_buffer[9] = { 0 };
 
-	printf("%d,%d,%d\r\n",my_test_buffer[0],my_test_buffer[3],my_test_buffer[6]);
+  MPU9250_ReadAccelerateData();
+  MPU9250_ReadGYROData();
+  MPU9250_ReadMagneticData();
+  MPU9250_Output(my_test_buffer);
+
+  printf("%d,%d,%d\r\n", my_test_buffer[0], my_test_buffer[3], my_test_buffer[6]);
 }
 
 //混合测试
 void test_mixed(void)
 {
-	PWM_Rotate(__HAL_TIM_IS_TIM_COUNTING_DOWN(&htim3));
+  PWM_Rotate(__HAL_TIM_IS_TIM_COUNTING_DOWN(&htim3));
 }
 /* USER CODE END 0 */
 
@@ -155,10 +156,10 @@ int main(void)
   MX_I2C2_Init();
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
-	MPU9250_Init(); //六轴初始化
-	PWM_Control_Init(); //步进电机初始化
-	Encoder_Init(); //编码器初始化
-	Calculate_Init(); //算法初始化
+  MPU9250_Init(); //六轴初始化
+  PWM_Control_Init(); //步进电机初始化
+  Encoder_Init(); //编码器初始化
+  Calculate_Init(); //算法初始化
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -166,13 +167,8 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-#ifdef START
-		Task_scan_button();
-		Task_problem();
-#else
-//	  test_TIM_Encoder();
-	  test_mpu9250();
-#endif
+    Task_scan_button();
+    Task_problem();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -184,8 +180,8 @@ int main(void)
   */
 void SystemClock_Config(void)
 {
-  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  RCC_OscInitTypeDef RCC_OscInitStruct = { 0 };
+  RCC_ClkInitTypeDef RCC_ClkInitStruct = { 0 };
 
   /** Configure the main internal regulator output voltage
   */
@@ -209,8 +205,8 @@ void SystemClock_Config(void)
   }
   /** Initializes the CPU, AHB and APB buses clocks
   */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
+    | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
@@ -225,121 +221,178 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void Task_problem(void)
 {
-	if(MODE == 1) //摆杆旋转模式
-	{
-		rotate_board();
-	}
-	else if(MODE == 2) //硬币模式1
-	{
-		stable_board();
-	}
-	else if(MODE == 3) //硬币模式2
-	{
-		pid_stable_board();
-	}
-	else //MODE == 0
-	{
-		Task_Idle();
-	}
+  if (MODE == 1) //摆杆旋转模式
+  {
+    rotate_board();
+  }
+  else if (MODE == 2) //硬币模式1
+  {
+    stable_board();
+  }
+  else if (MODE == 3) //硬币模式2
+  {
+    pid_stable_board();
+  }
+  else //MODE == 0
+  {
+    Task_Idle();
+  }
+
+  switch (MODE)
+  {
+  case 1:
+    printf("rotate\r\n");
+    break;
+  case 2:
+    printf("coin_mode_a\r\n");
+    break;
+  case 3:
+    printf("coin_mode_b\r\n");
+    break;
+  case 0:
+    break;
+  default:
+    break;
+  }
 }
 
 void Task_scan_button(void)
 {
-	if((HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == RESET) || (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == RESET))
-	{
-		HAL_Delay(5);
-		if(HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == RESET)
-		{
-			if(MODE == 3)
-			{
-				MODE = 0;
-			}
-			else
-			{
-				MODE++;
-			}
-		}
-		else if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == RESET)
-		{
-			if(MODE == 0)
-			{
-				MODE = 3;
-			}
-			else
-			{
-				MODE--;
-			}
-		}
-	}
+  if ((HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == RESET) || (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == RESET))
+  {
+    HAL_Delay(5);
+    if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == RESET)
+    {
+      if (MODE == 3)
+      {
+        MODE = 0;
+      }
+      else
+      {
+        MODE++;
+      }
+    }
+    else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == RESET)
+    {
+      if (MODE == 0)
+      {
+        MODE = 3;
+      }
+      else
+      {
+        MODE--;
+      }
+    }
+  }
 }
 
 //停止输出，复位
 void Task_Idle(void)
 {
-	PWM_Control_Stop();
+  PWM_Control_Stop();
 }
 
 /**
-	第一题
+  第一题
 3-5个周期内，
 摆杆每摆一个周期，平板旋转一周
 偏差绝对值不大于45度
 */
 void rotate_board(void)
 {
-	uint8_t count;
-	volatile uint8_t last;
-	while(count == 5)
-	{
-		if(Encoder_GetDirection() != last) //检测到反转，则算作一个周期
-		{
-			count++;
-			last = Encoder_GetDirection();
-			PWM_Rotate(360);
-		}
-	}
+  uint8_t count;
+  volatile uint8_t last;
+  while (count == 5)
+  {
+    if (Encoder_GetDirection() != last) //检测到反转，则算作一个周期
+    {
+      count++;
+      last = Encoder_GetDirection();
+      PWM_Rotate(360);
+    }
+  }
 }
 
 /**
-	第二题
-让平板和摆保持垂直
+  第二题
+让平板保持水平
 摆角是多少，步进电机就转多少
 */
 void stable_board(void)
 {
-	PWM_Rotate(Encoder_Get_Angle());
+  PWM_Rotate(Encoder_Get_Angle());
 }
 
 /**
-	第三题
+  第三题
 使用PID算法让平板尽量保证水平
 先预测摆角再让步进电机转动
 */
 void pid_stable_board(void)
 {
-	//volatile float target_angle = Encoder_Get_Angle();
-	//volatile float target_speed = 
-	PWM_Rotate(PID_realize(Encoder_Get_Angle()));
+  PWM_Rotate(PID_realize(Encoder_Get_Angle()));
 }
 
+
 /**
-	发挥部分
+    发挥部分1
 经过数学计算得到
 应使平板转动4/9 theta
 靠近平衡位置-正转
 远离平衡位置-反转
 */
-void pid_laser_pointer(void)
+void laser_pointer_rotate(void)
 {
-	if(close_to_middle()) //靠近平衡位置
-	{
-		pid_laser_pointer_rotate(MOV_THETA * Encoder_Get_Angle(), 0);
-	}
-	else
-	{
-		pid_laser_pointer_rotate(MOV_THETA * Encoder_Get_Angle(), 1);
-	}
+  float THETA = Encoder_Get_Angle();
+  if (Encoder_GetDirection() < 0)
+  {
+    PWM_Rotate(THETA += atan((100 - 100 * cos(THETA)) / (150 - 100 * sin(THETA))));
+  }
+  else
+  {
+    PWM_Rotate(THETA += atan((100 - 100 * cos(THETA)) / (150 + 100 * sin(THETA))));
+  }
 }
+
+volatile float PID_Realize(volatile float laser_pointer_rotate)
+{
+  pid.target_val = laser_pointer_rotate;
+  pid.err = pid.target_val - pid.actual_val;
+  volatile float incrementAngle = pid.Kp * (pid.err - pid.err_next) + pid.Ki * pid.err + pid.Kd * (pid.err - 2 * pid.err_next + pid.err_last);
+  pid.actual_val += incrementAngle;
+  pid.err_last = pid.err_next;
+  pid.err_next = pid.err;
+  return pid.actual_val;
+}
+void pid_laser_pointer_rotate(void)
+{
+
+  volatile float theta = 0;
+  uint8_t flag = 0;
+  if (flag == 0) //靠近平衡位置
+  {
+    pid_laser_pointer_rotate();
+  }
+  else
+  {
+    pid_laser_pointer_rotate();
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* USER CODE END 4 */
 
@@ -366,12 +419,12 @@ void Error_Handler(void)
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(uint8_t *file, uint32_t line)
+void assert_failed(uint8_t* file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-  /* USER CODE END 6 */
+     /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
 
