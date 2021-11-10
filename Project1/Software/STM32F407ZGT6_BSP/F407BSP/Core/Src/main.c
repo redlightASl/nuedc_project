@@ -168,7 +168,8 @@ int main(void)
   {
     /* USER CODE END WHILE */
     Task_scan_button();
-    Task_problem();
+	  test_mpu9250();
+    //Task_problem();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -353,7 +354,7 @@ void laser_pointer_rotate(void)
     PWM_Rotate(THETA += atan((100 - 100 * cos(THETA)) / (150 + 100 * sin(THETA))));
   }
 }
-
+/*
 volatile float PID_Realize(volatile float laser_pointer_rotate)
 {
   pid.target_val = laser_pointer_rotate;
@@ -381,7 +382,7 @@ void pid_laser_pointer_rotate(void)
 }
 
 
-
+*/
 
 
 

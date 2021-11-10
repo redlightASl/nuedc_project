@@ -1,0 +1,4 @@
+Removed Pin From Net: NetName=PE4_TIM15_CH1N Pin=M1-169
+Removed Pin From Net: NetName=PA1_TIM5_CH2 Pin=M1-173
+Added Pin To Net: NetName=PE4_TIM15_CH1N Pin=M1-170
+Added Pin To Net: NetName=PA1_TIM5_CH2 Pin=M1-174

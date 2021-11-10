@@ -1,0 +1,2 @@
+Removed Pin From Net: NetName=PF6_UART7_RX Pin=M1-161
+Added Pin To Net: NetName=PF6_UART7_RX Pin=M1-162

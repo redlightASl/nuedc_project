@@ -2,7 +2,6 @@
 "f407bsp\startup_stm32f407xx.o"
 "f407bsp\hmc5883l.o"
 "f407bsp\mpu9250.o"
-"f407bsp\lcd.o"
 "f407bsp\ltdc.o"
 "f407bsp\main.o"
 "f407bsp\gpio.o"

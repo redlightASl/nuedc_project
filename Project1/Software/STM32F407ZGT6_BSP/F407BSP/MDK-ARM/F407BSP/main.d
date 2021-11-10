@@ -39,9 +39,11 @@ f407bsp\main.o: ../Core/Inc/spi.h
 f407bsp\main.o: ../Core/Inc/tim.h
 f407bsp\main.o: ../Core/Inc/usart.h
 f407bsp\main.o: ../Core/Inc/gpio.h
+f407bsp\main.o: D:\keil\ARM\ARMCC\Bin\..\include\math.h
 f407bsp\main.o: D:\keil\ARM\ARMCC\Bin\..\include\stdio.h
 f407bsp\main.o: D:\keil\ARM\ARMCC\Bin\..\include\stdlib.h
 f407bsp\main.o: D:\keil\ARM\ARMCC\Bin\..\include\string.h
+f407bsp\main.o: ../Core/Inc/hmc5883l.h
 f407bsp\main.o: ../Core/Inc/mpu9250.h
 f407bsp\main.o: ../Core/Inc/encoder.h
 f407bsp\main.o: ../Core/Inc/pwmout.h

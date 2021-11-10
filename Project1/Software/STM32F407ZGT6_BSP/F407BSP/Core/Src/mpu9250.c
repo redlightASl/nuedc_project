@@ -1,6 +1,7 @@
 #include "mpu9250.h"
 #include "i2c.h"
 #include "usart.h"
+#include <stdio.h>
 #include <math.h>
 
 int16_t accData[3];

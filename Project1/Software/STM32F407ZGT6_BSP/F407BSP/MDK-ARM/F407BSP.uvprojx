@@ -404,11 +404,6 @@
               <FilePath>..\Core\Src\mpu9250.c</FilePath>
             </File>
             <File>
-              <FileName>lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Core\Src\lcd.c</FilePath>
-            </File>
-            <File>
               <FileName>ltdc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\Src\ltdc.c</FilePath>

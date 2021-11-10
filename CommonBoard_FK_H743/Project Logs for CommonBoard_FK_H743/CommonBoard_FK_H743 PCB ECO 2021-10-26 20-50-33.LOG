@@ -1,0 +1,8 @@
+Removed Pin From Net: NetName=PC4 Pin=JP2-4
+Removed Pin From Net: NetName=PC5 Pin=JP2-5
+Removed Pin From Net: NetName=PC13 Pin=JP2-6
+Added Pin To Net: NetName=PC13 Pin=JP2-4
+Added Pin To Net: NetName=PC4 Pin=JP2-5
+Added Pin To Net: NetName=PC5 Pin=JP2-6
+Added Room: Name=CommonBoard_FK_H743
+Added Room: Name=CommonBoard_FK_H743_out
