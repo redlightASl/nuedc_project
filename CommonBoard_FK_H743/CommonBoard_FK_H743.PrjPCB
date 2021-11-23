@@ -122,10 +122,6 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=RTKHXHUD
 
-[GeneratedDocument1]
-DocumentPath=Project Outputs for CommonBoard_FK_H743\Design Rule Check - CommonBoard_FK_H743.html
-DItemRevisionGUID=
-
 [Configuration1]
 Name=Sources
 ParameterCount=0

@@ -1,8 +1,0 @@
-Removed Pin From Net: NetName=+5 Pin=U2-D
-Removed Pin From Net: NetName=VDDA Pin=U2-G
-Removed Pin From Net: NetName=VSSA Pin=U2-S
-Added Pin To Net: NetName=VDDA Pin=U2-D
-Added Pin To Net: NetName=VSSA Pin=U2-G
-Added Pin To Net: NetName=+5 Pin=U2-S
-Added Room: Name=Sheet1
-Added Room: Name=Sheet2

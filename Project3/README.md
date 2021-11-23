@@ -18,7 +18,7 @@
 * openmv跟踪小球、手写/打印数字识别
 * 超声波避障
 * openmv视觉避障
-* 基于树莓派或nano实现多目标识别（基于yolo）
+* 基于树莓派或nano实现多目标检测（基于yolo）
 * esp32图传+人脸识别（使用esp-eye套件或esp-cam）
 * 基于zynq或fpga实现小车基本控制
 * 直接基于zynq（感觉不太可能）或移植pynq实现机器视觉功能

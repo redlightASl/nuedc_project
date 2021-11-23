@@ -1,8 +1,0 @@
-Removed Pin From Net: NetName=PF9_TIM14_CH1 Pin=M1-155
-Removed Pin From Net: NetName=PF8_TIM13_CH1 Pin=M1-157
-Removed Pin From Net: NetName=PF7_UART7_TX Pin=M1-159
-Added Pin To Net: NetName=PF9_TIM14_CH1 Pin=M1-156
-Added Pin To Net: NetName=PF8_TIM13_CH1 Pin=M1-158
-Added Pin To Net: NetName=PF7_UART7_TX Pin=M1-160
-Added Room: Name=CommonBoard_FK_H743
-Added Room: Name=CommonBoard_FK_H743_out

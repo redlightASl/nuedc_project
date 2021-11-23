@@ -1,4 +1,0 @@
-Removed Pin From Net: NetName=PA0_TIM2_CH1 Pin=M1-175
-Removed Pin From Net: NetName=PC1 Pin=M1-179
-Added Pin To Net: NetName=PA0_TIM2_CH1 Pin=M1-176
-Added Pin To Net: NetName=PC1 Pin=M1-180

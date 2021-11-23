@@ -1,6 +1,0 @@
-Removed Pin From Net: NetName=PA3_UART2_RX Pin=JP23-2
-Removed Pin From Net: NetName=PD5_UART2_TX Pin=JP23-3
-Added Pin To Net: NetName=PD5_UART2_TX Pin=JP23-2
-Added Pin To Net: NetName=PA3_UART2_RX Pin=JP23-3
-Added Room: Name=CommonBoard_FK_H743
-Added Room: Name=CommonBoard_FK_H743_out

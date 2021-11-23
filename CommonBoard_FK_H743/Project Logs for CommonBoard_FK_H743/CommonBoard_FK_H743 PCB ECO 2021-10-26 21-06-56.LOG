@@ -1,8 +1,0 @@
-Removed Pin From Net: NetName=PC2_ADC3_INP0 Pin=JP6-1
-Removed Pin From Net: NetName=PC3_ADC3_INP1 Pin=JP6-2
-Removed Pin From Net: NetName=PA4_DAC1_OUT1 Pin=JP6-3
-Added Pin To Net: NetName=PA4_DAC1_OUT1 Pin=JP6-1
-Added Pin To Net: NetName=PC2_ADC3_INP0 Pin=JP6-2
-Added Pin To Net: NetName=PC3_ADC3_INP1 Pin=JP6-3
-Added Room: Name=CommonBoard_FK_H743
-Added Room: Name=CommonBoard_FK_H743_out
