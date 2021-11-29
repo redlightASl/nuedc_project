@@ -1,0 +1,30 @@
+# 引脚分配
+
+PF9 KEY0按键
+
+PA0 WK_UP按键
+
+PF9 LED0
+
+PF10 LED1
+
+PA9 UART1-Tx
+
+PA10 UART1-Rx
+
+UART3-Tx
+
+UART3-Rx
+
+软件I2C-SCL
+
+软件I2C-SDA
+
+TIM-CH
+
+TIM-CH
+
+TIM-CH
+
+TIM-CH
+

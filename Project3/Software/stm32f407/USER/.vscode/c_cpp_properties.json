@@ -24,6 +24,7 @@
                 "f:\\Git_repository\\nuedc_project\\Project3\\Software\\stm32f407\\DMP\\mpl",
                 "D:\\keil\\ARM\\ARMCC\\include",
                 "D:\\keil\\ARM\\ARMCC\\include\\rw",
+                "f:\\Git_repository\\nuedc_project\\Project3\\Software\\stm32f407\\HARDWARE\\Control",
                 "f:\\Git_repository\\nuedc_project\\Project3\\Software\\stm32f407\\STM32F4xx_FWLib\\src"
             ],
             "defines": [

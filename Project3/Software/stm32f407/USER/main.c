@@ -5,6 +5,7 @@
 #include "mpu9250.h"
 #include "inv_mpu.h"
 #include "motion.h"
+#include "control.h"
 #include "led.h"
 #include "key.h"
 
@@ -17,6 +18,7 @@ void Board_init(void)
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //设置系统中断优先级分组2
 	delay_init(168); //初始化延时函数
 	uart_init(115200); //初始化串口波特率为115200
+	Uart3_init(521600); //初始化通信串口波特率为521600
 	Led_Init(); //初始化LED
 	KEY_Init(); //初始化按键
 	Motion_Init(200 - 1, 8400 - 1); //84M/4200=20000hz的计数频率,重装载值400，所以PWM频率为 20000/400=50hz

@@ -23,6 +23,8 @@
         "led.h": "c",
         "sys.h": "c",
         "motion.h": "c",
-        "mpuiic.h": "c"
+        "mpuiic.h": "c",
+        "usart.h": "c",
+        "control.h": "c"
     }
 }
